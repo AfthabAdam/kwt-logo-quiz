@@ -135,11 +135,17 @@ export default function KWTLogoQuiz() {
   }, []);
 
   // Timer
-  useEffect(() => {
-    let t: any;
-    if (running) t = setInterval(() => setElapsed((e) => e + 1), 1000);
-    return () => clearInterval(t);
-  }, [running]);
+  // ✅ fixed
+useEffect(() => {
+  let id: ReturnType<typeof setInterval> | undefined;
+  if (running) {
+    id = setInterval(() => setElapsed((e) => e + 1), 1000);
+  }
+  return () => {
+    if (id) clearInterval(id);
+  };
+}, [running]);
+
 
   // Toast auto-hide
   useEffect(() => {
