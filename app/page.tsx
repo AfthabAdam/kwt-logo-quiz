@@ -110,7 +110,9 @@ export default function KWTLogoQuiz() {
   const [view, setView] = useState<"home" | "game" | "completed">("home");
   const [level, setLevel] = useState<Level | null>(null);
   const [allLogos, setAllLogos] = useState<LogoRow[]>([]);
-  const [deck, setDeck] = useState<(LogoRow & { value: string; correct: boolean; showHint: boolean })[]>([]);
+  const [deck, setDeck] = useState<
+  (LogoRow & { value: string; correct: boolean; showHint: boolean; revealed: boolean })[]
+>([]);
   const [elapsed, setElapsed] = useState(0);
   const [finalTime, setFinalTime] = useState(0);
   const [toast, setToast] = useState("");
