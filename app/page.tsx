@@ -429,7 +429,7 @@ Think you can beat me? ⏱️
 
                   {/* Input (auto-solve) */}
                   <input
-                    ref={(el) => (inputRefs.current[i] = el)}
+                    ref={(el) => { inputRefs.current[i] = el; }}
                     autoComplete="off"
                     autoCorrect="off"
                     autoCapitalize="none"
