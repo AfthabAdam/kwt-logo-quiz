@@ -278,7 +278,7 @@ Think you can beat me? ⏱️
     <header className="max-w-2xl mx-auto text-center py-6">
       <div className="flex items-center justify-center">
         <img
-          src={safeSrc("/brand/kwt-logo-quiz.svg")}
+          src={safeSrc("/brand/KWT-logo-quiz.svg")}
           alt="KWT Logo Quiz"
           className={view === "home" ? "h-40 sm:h-80 w-auto" : "h-10 sm:h-12 w-auto"}
         />
