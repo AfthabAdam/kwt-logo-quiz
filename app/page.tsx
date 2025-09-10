@@ -91,7 +91,7 @@ function uniqueById<T extends { id: string }>(arr: T[]) {
   const seen = new Set<string>();
   return arr.filter((x) => (seen.has(x.id) ? false : (seen.add(x.id), true)));
 }
-function sampleUnique<T>(pool: T[], count: number) {
+function sampleUnique<T extends { id: string }>(pool: T[], count: number) {
   const unique = uniqueById(pool);
   return shuffle(unique).slice(0, Math.min(count, unique.length));
 }
