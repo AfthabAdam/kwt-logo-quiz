@@ -107,32 +107,6 @@ function buildDeck(level: Level, all: LogoRow[]) {
 
 /* -------------------------- Component -------------------------- */
 
-export const metadata = {
-  title: "KWT Logo Quiz – Guess Kuwaiti Brands",
-  description: "Test your knowledge of Kuwaiti brands. Guess logos, race against the timer, and challenge your friends!",
-  openGraph: {
-    title: "KWT Logo Quiz – Guess Kuwaiti Brands",
-    description: "Can you guess all the Kuwaiti brands by their logos? Play now!",
-    url: "https://kwtlogoquiz.com",
-    siteName: "KWT Logo Quiz",
-    images: [
-      {
-        url: "/brand/kwt-logo-quiz-og.png", // create a 1200x630 image in /public/brand
-        width: 1200,
-        height: 630,
-        alt: "KWT Logo Quiz",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "KWT Logo Quiz",
-    description: "Guess Kuwaiti brands by their logos!",
-    images: ["/brand/kwt-logo-quiz-og.png"],
-  },
-};
-
 export default function KWTLogoQuiz() {
   const [view, setView] = useState<"home" | "game" | "completed">("home");
   const [level, setLevel] = useState<Level | null>(null);
