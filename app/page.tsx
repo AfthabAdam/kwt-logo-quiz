@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3zOAarfvLQ4MKqV3R_om5nh_TRqhrsOUGkTHoPBOqLNoM8kieHFQa9grZzs3LLbgwPHIzPwU-FbrV/pub?output=csv";
 
+  
 /* -------------------------- Helpers -------------------------- */
 
 type Level = "Easy" | "Medium" | "Hard";
@@ -105,6 +106,32 @@ function buildDeck(level: Level, all: LogoRow[]) {
 }
 
 /* -------------------------- Component -------------------------- */
+
+export const metadata = {
+  title: "KWT Logo Quiz – Guess Kuwaiti Brands",
+  description: "Test your knowledge of Kuwaiti brands. Guess logos, race against the timer, and challenge your friends!",
+  openGraph: {
+    title: "KWT Logo Quiz – Guess Kuwaiti Brands",
+    description: "Can you guess all the Kuwaiti brands by their logos? Play now!",
+    url: "https://kwtlogoquiz.com",
+    siteName: "KWT Logo Quiz",
+    images: [
+      {
+        url: "/brand/kwt-logo-quiz-og.png", // create a 1200x630 image in /public/brand
+        width: 1200,
+        height: 630,
+        alt: "KWT Logo Quiz",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KWT Logo Quiz",
+    description: "Guess Kuwaiti brands by their logos!",
+    images: ["/brand/kwt-logo-quiz-og.png"],
+  },
+};
 
 export default function KWTLogoQuiz() {
   const [view, setView] = useState<"home" | "game" | "completed">("home");
@@ -354,55 +381,59 @@ Think you can beat me? ⏱️
           </div>
 
           <div className="bg-white rounded-2xl shadow p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="text-sm text-gray-500">All logos</div>
+            {/* Sticky toolbar inside the white card */}
+<div className="sticky top-0 z-20 -mx-6 -mt-6 px-6 py-3 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b mb-4">
+  <div className="flex items-center justify-between">
+    <div className="text-sm text-gray-500">All logos</div>
 
-              <div className="flex items-center gap-2 text-xs text-gray-600">
-                {/* Reveal one */}
-                <button
-                  onClick={revealOne}
-                  disabled={revealsLeft <= 0 || solvedCount === total}
-                  className={`px-2 py-1 rounded-lg ${
-                    revealsLeft > 0 && solvedCount !== total
-                      ? "bg-amber-100 hover:bg-amber-200 text-amber-900"
-                      : "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  }`}
-                  title={revealsLeft > 0 ? "Reveal a correct answer" : "No reveals left"}
-                >
-                  Reveal one ({Math.max(revealsLeft, 0)} left)
-                </button>
+    <div className="flex items-center gap-2 text-xs text-gray-600">
+      {/* Reveal one */}
+      <button
+        onClick={revealOne}
+        disabled={revealsLeft <= 0 || solvedCount === total}
+        className={`px-2 py-1 rounded-lg ${
+          revealsLeft > 0 && solvedCount !== total
+            ? "bg-amber-100 hover:bg-amber-200 text-amber-900"
+            : "bg-gray-100 text-gray-400 cursor-not-allowed"
+        }`}
+        title={revealsLeft > 0 ? "Reveal a correct answer" : "No reveals left"}
+      >
+        Reveal one ({Math.max(revealsLeft, 0)} left)
+      </button>
 
-                {/* Share to get 2 more reveals */}
-                {revealsLeft <= 0 && solvedCount !== total && (
-                  <button
-                    onClick={shareForReveals}
-                    className="px-2 py-1 rounded-lg bg-gray-900 text-white hover:opacity-90"
-                    title="Share to unlock +2 reveals"
-                  >
-                    Share to get +2
-                  </button>
-                )}
+      {/* Share to get 2 more reveals */}
+      {revealsLeft <= 0 && solvedCount !== total && (
+        <button
+          onClick={shareForReveals}
+          className="px-2 py-1 rounded-lg bg-gray-900 text-white hover:opacity-90"
+          title="Share to unlock +2 reveals"
+        >
+          Share to get +2
+        </button>
+      )}
 
-                {/* Old hint button */}
-                <button
-                  onClick={() =>
-                    setDeck((prev) => {
-                      const next = [...prev];
-                      const idx = next.findIndex((c) => !c.correct && !c.showHint);
-                      if (idx !== -1) next[idx] = { ...next[idx], showHint: true };
-                      else {
-                        const any = next.findIndex((c) => !c.correct);
-                        if (any !== -1) next[any] = { ...next[any], showHint: !next[any].showHint };
-                      }
-                      return next;
-                    })
-                  }
-                  className="px-2 py-1 rounded-lg bg-gray-100 hover:bg-gray-200"
-                >
-                  Show a hint
-                </button>
-              </div>
-            </div>
+      {/* Hint */}
+      <button
+        onClick={() =>
+          setDeck((prev) => {
+            const next = [...prev];
+            const idx = next.findIndex((c) => !c.correct && !c.showHint);
+            if (idx !== -1) next[idx] = { ...next[idx], showHint: true };
+            else {
+              const any = next.findIndex((c) => !c.correct);
+              if (any !== -1) next[any] = { ...next[any], showHint: !next[any].showHint };
+            }
+            return next;
+          })
+        }
+        className="px-2 py-1 rounded-lg bg-gray-100 hover:bg-gray-200"
+      >
+        Show a hint
+      </button>
+    </div>
+  </div>
+</div>
+
 
             {/* Grid of logo cards */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
