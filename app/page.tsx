@@ -283,13 +283,13 @@ Think you can beat me? ⏱️
           alt="KWT Logo Quiz"
           className={
   view === "home"
-    ? "h-24 sm:h-40 md:h-56 lg:h-72 w-auto"
-    : "h-8 sm:h-10 md:h-12 lg:h-16 w-auto"
+    ? "h-30 sm:h-40 md:h-56 lg:h-72 w-auto"
+    : "h-12 sm:h-10 md:h-12 lg:h-40 w-auto"
 }
         />
       </div>
       {view === "home" && (
-        <p className="text-[14px] sm:text-[18px] lg:text-[24px] text-gray-500 mt-[6px]">
+        <p className="text-[15px] sm:text-[12px] lg:text-[24px] text-gray-500 mt-[6px]">
           Guess the Kuwaiti brands by their logos
         </p>
       )}
@@ -533,11 +533,6 @@ Think you can beat me? ⏱️
     {toast}
   </div>
 )}
-
-{/* Footer hint */}
-<footer className="text-center text-[11px] text-gray-400 py-6">
-  Step 1 complete — functional flow with timer, levels, and sharing. Next: real logos, grid mode, scoring tweaks.
-</footer>
 </div>
 );
 }
