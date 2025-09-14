@@ -281,7 +281,11 @@ Think you can beat me? ⏱️
         <img
           src={safeSrc("/brand/KWT-logo-quiz.svg")}
           alt="KWT Logo Quiz"
-          className={view === "home" ? "h-40 sm:h-80 w-auto" : "h-10 sm:h-12 w-auto"}
+          className={
+  view === "home"
+    ? "h-24 sm:h-40 md:h-56 lg:h-72 w-auto"
+    : "h-8 sm:h-10 md:h-12 lg:h-16 w-auto"
+}
         />
       </div>
       {view === "home" && (
@@ -356,7 +360,7 @@ Think you can beat me? ⏱️
 
           <div className="bg-white rounded-2xl shadow p-6">
             {/* Sticky toolbar inside the white card */}
-<div className="sticky top-0 z-20 -mx-6 -mt-6 px-6 py-3 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b mb-4">
+<div className="sticky top-0 z-20 -mx-6 -mt-6 px-6 py-3 rounded-t-2xl bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 mb-4">
   <div className="flex items-center justify-between">
     <div className="text-sm text-gray-500">All logos</div>
 
@@ -485,36 +489,55 @@ Think you can beat me? ⏱️
         </div>
       )}
 
-      {/* COMPLETED */}
-      {view === "completed" && (
-        <div className="max-w-xl mx-auto px-4 pb-16">
-          <div className="bg-white rounded-2xl shadow p-6 text-center space-y-3">
-            <div className="text-4xl">🎉</div>
-            <h2 className="text-xl font-bold">All done!</h2>
-            <div className="text-sm text-gray-600">
-  Score: <span className="font-semibold">{solvedCount}</span>
-</div>
-            <div className="text-sm text-gray-600">
-              Time: <span className="font-mono bg-gray-100 rounded px-2 py-1">{formatTime(finalTime)}</span>
-            </div>
-            <div className="pt-2 flex flex-col sm:flex-row gap-2 justify-center">
-              <button onClick={() => onShare()} className="rounded-xl px-4 py-3 bg-gray-900 text-white font-medium hover:opacity-90">
-                Challenge your friends
-              </button>
-              <button onClick={() => setView("home")} className="rounded-xl px-4 py-3 bg-gray-100 font-medium hover:bg-gray-200">
-                Play again
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+{/* COMPLETED */}
+{view === "completed" && (
+  <div className="max-w-xl mx-auto px-4 pb-16">
+    <div className="bg-white rounded-2xl shadow p-6 text-center space-y-4">
+      <div className="text-4xl">🎉</div>
+      <h2 className="text-2xl sm:text-3xl font-bold">All done!</h2>
 
-      {/* Toast */}
-      {toast && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-4 py-2 rounded-full shadow">
-          {toast}
+      {/* Stats */}
+      <div className="space-y-2">
+        <div className="text-base sm:text-lg md:text-xl text-gray-700">
+          Score: <span className="font-bold text-lg sm:text-2xl">{solvedCount}</span>
         </div>
-      )}
+        <div className="text-base sm:text-lg md:text-xl text-gray-700">
+          Time:{" "}
+          <span className="font-mono bg-gray-100 rounded px-3 py-1 text-lg sm:text-2xl">
+            {formatTime(finalTime)}
+          </span>
+        </div>
+      </div>
+
+      <div className="pt-2 flex flex-col sm:flex-row gap-2 justify-center">
+        <button
+          onClick={() => onShare()}
+          className="rounded-xl px-4 py-3 bg-gray-900 text-white font-medium hover:opacity-90"
+        >
+          Challenge your friends
+        </button>
+        <button
+          onClick={() => setView("home")}
+          className="rounded-xl px-4 py-3 bg-gray-100 font-medium hover:bg-gray-200"
+        >
+          Play again
+        </button>
+      </div>
     </div>
-  );
+  </div>
+)}
+
+{/* Toast */}
+{toast && (
+  <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-4 py-2 rounded-full shadow">
+    {toast}
+  </div>
+)}
+
+{/* Footer hint */}
+<footer className="text-center text-[11px] text-gray-400 py-6">
+  Step 1 complete — functional flow with timer, levels, and sharing. Next: real logos, grid mode, scoring tweaks.
+</footer>
+</div>
+);
 }
